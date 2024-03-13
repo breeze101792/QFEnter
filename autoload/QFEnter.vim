@@ -276,6 +276,12 @@ function! QFEnter#OpenQFItem(tabwinfunc, qfopencmd, keepfocus, isvisual)
 		let vblnum2 = getpos("'>")[1]
 	endif
 
+	if len(getloclist(0)) > 0
+		let isloclist = 1
+	else
+		let isloclist = 0
+	endif
+
 	call s:OpenQFItem(a:tabwinfunc, a:qfopencmd, qflnum)
 
 	" keepfocus
@@ -299,11 +305,6 @@ function! QFEnter#OpenQFItem(tabwinfunc, qfopencmd, keepfocus, isvisual)
 	endif
 
 	" g:qfenter_autoclose
-	if len(getloclist(0)) > 0
-		let isloclist = 1
-	else
-		let isloclist = 0
-	endif
 	if g:qfenter_autoclose
 		if isloclist
 			lclose
